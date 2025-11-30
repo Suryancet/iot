@@ -1,0 +1,45 @@
+// Weather Station using Arduino (No LCD - TinkerCAD)
+
+int ldrPin = A0;       // Light sensor
+int humidityPin = A1;  // Potentiometer
+int tempPin = A2;      // TMP36 sensor
+
+void setup()
+{
+  Serial.begin(9600);
+  Serial.println("Weather Station Starting...\n");
+}
+
+void loop()
+{
+  int lightValue = analogRead(ldrPin);
+  int humidityValue = analogRead(humidityPin);
+  int tempValue = analogRead(tempPin);
+
+  // Convert TMP36 analog value to temperature
+  float voltage = tempValue * (5.0 / 1023.0);
+  float temperature = (voltage - 0.5) * 100.0;
+
+  // Convert sensor values to percentage
+  int lightPercent = map(lightValue, 0, 1023, 0, 100);
+  int humidity = map(humidityValue, 0, 1023, 0, 100);
+
+  // Print values in Serial Monitor
+  Serial.println("--------- WEATHER STATION DATA ---------");
+
+  Serial.print("Temperature: ");
+  Serial.print(temperature);
+  Serial.println(" °C");
+
+  Serial.print("Light Intensity: ");
+  Serial.print(lightPercent);
+  Serial.println(" %");
+
+  Serial.print("Humidity: ");
+  Serial.print(humidity);
+  Serial.println(" %");
+
+  Serial.println("----------------------------------------\n");
+
+  delay(2000);
+}
