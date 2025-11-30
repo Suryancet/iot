@@ -1,0 +1,12 @@
+void setup() {
+  Serial.begin(9600);   
+  Serial.println("UART Ready. Type a message:");
+}
+
+void loop() {
+  if (Serial.available() > 0) {
+    String message = Serial.readString();
+    Serial.print("Received via UART: ");
+    Serial.println(message);
+  }
+}
