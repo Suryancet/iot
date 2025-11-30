@@ -1,0 +1,29 @@
+int gasPin = A0;
+int buzzer = 10;
+int led = 3;
+int threshold = 300;
+
+void setup() {
+  pinMode(buzzer, OUTPUT);
+  pinMode(led, OUTPUT);
+  Serial.begin(9600);
+}
+
+void loop() {
+  int gasValue = analogRead(gasPin);
+
+  Serial.print("Gas Level: ");
+  Serial.println(gasValue);
+
+  if (gasValue > threshold) {
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(led, HIGH);
+    Serial.println("⚠ GAS LEAK DETECTED!");
+  } else {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);
+    Serial.println("Gas level normal");
+  }
+
+  delay(1000);
+}

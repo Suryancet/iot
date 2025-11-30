@@ -1,0 +1,29 @@
+int buzzer = 7;
+int echo = 6;
+int trig = 5;
+int led=8;
+
+void setup() {
+  pinMode(buzzer, OUTPUT);
+  pinMode(led,OUTPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+}
+
+void loop() {
+  digitalWrite(trig, LOW);
+  delay(100);
+  digitalWrite(trig, HIGH);
+  delay(100);
+  digitalWrite(trig, LOW);
+  long duration = pulseIn(echo, HIGH);
+  int distance = duration * 0.034 / 2;
+  if (distance < 30) {
+    digitalWrite(buzzer, HIGH);
+    digitalWrite(led, HIGH);
+  } else {
+    digitalWrite(buzzer, LOW);
+    digitalWrite(led, LOW);    
+  }
+  delay(1000);
+}

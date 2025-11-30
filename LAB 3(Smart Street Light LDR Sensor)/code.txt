@@ -1,0 +1,19 @@
+int LED=13;
+int threshold=500;
+void setup()
+{
+  pinMode(LED, OUTPUT);
+}
+
+void loop()
+{
+  int value=analogRead(A5);
+  if(value>500){
+  	digitalWrite(LED,HIGH); 
+  }
+  else{
+    	digitalWrite(LED,LOW); 
+  }
+  delay(1000);
+    
+}

@@ -1,0 +1,41 @@
+int pHSensor = A0;
+int led1=3;
+int led2=7;
+int led3=12;
+float pHValue;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(led1,OUTPUT);
+  pinMode(led2,OUTPUT);
+  pinMode(led3,OUTPUT);
+
+}
+
+void loop() {
+
+  int sensorValue = analogRead(pHSensor);
+  Serial.print("pH Value: ");
+  Serial.println(sensorValue);
+  if (sensorValue < 400) {
+    digitalWrite(led3,HIGH);
+    digitalWrite(led2,LOW);
+    digitalWrite(led1,LOW);
+    Serial.println("Acidic in Nature");
+    
+  } 
+  else if (sensorValue >=400 && sensorValue <= 800) {
+    Serial.println("Neutral in Nature");
+    digitalWrite(led2,HIGH);
+    digitalWrite(led3,LOW);
+    digitalWrite(led1,LOW);
+  }
+  else {
+    digitalWrite(led1,HIGH);
+    Serial.println("Basic in Nature");
+    digitalWrite(led2,LOW);
+    digitalWrite(led3,LOW);
+  }
+  Serial.println("----------------------");
+  delay(2000);
+}
